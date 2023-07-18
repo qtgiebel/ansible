@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker build . -t fresh
+docker run --rm -it fresh

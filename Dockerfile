@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-add-repository -y ppa:ansible/ansible && \
     apt-add-repository -y ppa:neovim-ppa/unstable && \
     apt-get update && \
-    apt-get install -y curl git ansible build-essential && \
+    apt-get install -y curl git ansible build-essential neovim && \
     apt-get clean autoclean && \
     apt-get autoremove --yes
 
