@@ -1,0 +1,31 @@
+- name: Ensure .ssh directory exists.
+  become_user: pepezee
+  file:
+    dest: "{{ dest_key | dirname }}"
+    mode: 0700
+    state: directory
+  tags: &tags_for_ssh_tasks [ 'dotfiles', 'install', 'ssh' ]
+
+- name: Install ssh key
+  become_user: pepezee
+  copy:
+    src: "{{ source_key }}"
+    dest: "{{ dest_key }}"
+    mode: 0600
+  tags: *tags_for_ssh_tasks
+
+- name: Install ssh key public
+  become_user: pepezee
+  copy:
+    src: "{{ source_key }}.pub"
+    dest: "{{ dest_key }}.pub"
+    mode: 0644
+  tags: *tags_for_ssh_tasks
+
+- name: Set authorized key took from file
+  authorized_key:
+    user: "{{ lookup('env', 'USER') }}"
+    state: present
+    key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub"
+  with_fileglob:
+  - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
