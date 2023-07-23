@@ -1,2 +1,2 @@
 *.swp
-
+.ssh/known_hosts
