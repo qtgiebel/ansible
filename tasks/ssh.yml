@@ -23,9 +23,11 @@
   tags: *tags_for_ssh_tasks
 
 - name: Set authorized key took from file
+  become_user: pepezee
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
-    key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519.pub"
+    key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519.pub') }}"
   with_fileglob:
   - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
+  tags: *tags_for_ssh_tasks
