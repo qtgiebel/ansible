@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+# Undo zsh
+rm -rf ~/.oh-my-zsh
+rm ~/.zshrc
+cp ~/.shell.pre-oh-my-zsh ~/.zshrc
+source ~/.zshrc
+
+sudo chsh pepezee -s /bin/bash
+sudo apt -y purge zsh
