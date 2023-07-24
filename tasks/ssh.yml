@@ -1,5 +1,5 @@
 - name: Ensure .ssh directory exists.
-  become_user: pepezee
+  become_user: "{{ lookup('env', 'USER') }}"
   file:
     dest: "{{ dest_key | dirname }}"
     mode: 0700
@@ -7,7 +7,7 @@
   tags: &tags_for_ssh_tasks [ 'dotfiles', 'install', 'ssh' ]
 
 - name: Install ssh key
-  become_user: pepezee
+  become_user: "{{ lookup('env', 'USER') }}"
   copy:
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
@@ -15,7 +15,7 @@
   tags: *tags_for_ssh_tasks
 
 - name: Install ssh key public
-  become_user: pepezee
+  become_user: "{{ lookup('env', 'USER') }}"
   copy:
     src: "{{ source_key }}.pub"
     dest: "{{ dest_key }}.pub"
@@ -23,7 +23,7 @@
   tags: *tags_for_ssh_tasks
 
 - name: Set authorized key took from file
-  become_user: pepezee
+  become_user: "{{ lookup('env', 'USER') }}"
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
