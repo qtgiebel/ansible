@@ -1,4 +1,9 @@
 - hosts: localhost
+  vars:
+    source_key: "./.ssh/id_ed25519"
+    dest_key:   "{{ lookup('env', 'HOME')}}/.ssh/id_ed25519"
+    dev:        "{{ lookup('env', 'HOME')}}/dev"
+    user:       "{{ lookup('env', 'USER') }}"
   become: true
   pre_tasks:
   - name: Update Apt
@@ -10,4 +15,5 @@
       - install
       - core
   tasks:
+    - include: tasks/ssh.yml
     - include: tasks/zsh.yml

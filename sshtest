@@ -1,0 +1,2 @@
+#!/usr/bin/bash bash
+ansible-playbook -t ssh -kK local.yml --ask-vault-password
