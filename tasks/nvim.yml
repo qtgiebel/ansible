@@ -13,7 +13,7 @@
 - name: Add nvim ppa
   become: true
   apt_repository:
-    repo: ppa:neovim-ppa/unstable
+    repo: ppa:neovim-ppa/stable
     state: present
     update_cache: true
   tags: *tags_for_nvim
