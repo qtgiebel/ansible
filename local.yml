@@ -5,9 +5,9 @@
     dev:        "{{ lookup('env', 'HOME')}}/dev"
     user:       "{{ lookup('env', 'USER') }}"
     zsh_custom: "{{ lookup('env', 'HOME')}}/.oh-my-zsh/custom/"
-  become: true
   pre_tasks:
   - name: Update Apt
+    become: true
     apt:
       force_apt_get: true
       update_cache: true
@@ -17,4 +17,7 @@
       - core
   tasks:
     - include: tasks/ssh.yml
+      # - include: tasks/git.yml
     - include: tasks/zsh.yml
+    - include: tasks/nvim.yml
+    - include: tasks/tools.yml
