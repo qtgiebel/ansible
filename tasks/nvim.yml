@@ -1,0 +1,34 @@
+- name: Remove nvim 
+  become: true
+  shell: rm -rf ~/neovim
+  tags: &tags_for_nvim ['nvim', 'install'] 
+
+- name: Get packer
+  become: true
+  ansible.builtin.git: 
+    repo: 'https://github.com/wbthomason/packer.nvim'
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  tags: *tags_for_nvim
+ 
+- name: Add nvim ppa
+  become: true
+  apt_repository:
+    repo: ppa:neovim-ppa/unstable
+    state: present
+    update_cache: true
+  tags: *tags_for_nvim
+
+- name: Install Nvim 
+  become: true
+  apt: name=neovim 
+  tags: *tags_for_nvim
+
+- name: Neovim Plugin Development 1
+  become: true
+  apt: name=luarocks
+  tags: *tags_for_nvim
+  
+- name: Neovim Plugin Development 2
+  become: true
+  shell: luarocks install luacheck
+  tags: *tags_for_nvim
