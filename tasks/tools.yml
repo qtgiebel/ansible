@@ -1,3 +1,5 @@
+- name: install npm 
+  apt: name=npm
 - name: install tmux 
   apt: name=tmux
     
