@@ -1,0 +1,6 @@
+- name: install setup pkgs
+  become: true
+  apt:
+    pkg:
+      - build-essential
+      - curl

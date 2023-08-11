@@ -16,6 +16,7 @@
       - install
       - core
   tasks:
+    - include: tasks/precheck.yml
     - include: tasks/ssh.yml
       # - include: tasks/git.yml
     - include: tasks/zsh.yml

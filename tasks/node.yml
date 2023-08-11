@@ -1,0 +1,12 @@
+- name: install npm
+  become: true
+  apt: name=npm
+  tags: &tags_for_node_tasks [ 'install', 'node' ]
+
+- name: install n
+  shell: npm install n@latest
+  tags: *tags_for_node_tasks 
+  
+- name: install node latest
+  shell: n latest
+  tags: *tags_for_node_tasks 
